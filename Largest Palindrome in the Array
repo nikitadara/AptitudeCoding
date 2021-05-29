@@ -1,0 +1,60 @@
+Write a program to find the largest palindrome in the String Array
+
+Input Format:
+
+In First line take an Integer which is size of the array
+In Second line take a list of Strings
+Output Format:
+
+print the Largest palindrome String
+
+Example Input:
+4
+aba abab abaab abaaba
+
+Output:
+abaaba
+
+Note:
+
+If there are multiple largest palindromic strings with same length, print the lexicpraphically smallest one.
+
+Code:
+#include<iostream>
+#include<string>
+using namespace std;
+bool checkPalin(string s){
+    int l=0,r=s.length()-1;
+    while(l<r){
+        if(s[l]!=s[r])
+            return false;
+            l++;
+            r--;
+    }
+    return true;
+}
+int main(){
+    int n;
+    cin>>n;
+    string s;
+    int maxl=0;
+    string maxPalin;
+    for(int i=0;i<n;i++){
+        cin>>s;
+        if(checkPalin(s)){
+            if(s.length()>maxl){
+                maxl=s.length();
+                maxPalin=s;
+            }
+            else if(s.length()==maxl){
+                if(s<maxPalin){
+                    maxPalin=s;
+                }
+            }
+        }
+    }
+    if(!maxPalin.length())
+        cout<<"-1";
+    else
+    	cout<<maxPalin;
+}
