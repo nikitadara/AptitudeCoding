@@ -1,0 +1,33 @@
+Given an integer n as input, print an inverted full pyramid of n rows.
+
+Input Format:
+
+Take input an integer from stdin
+Output Format:
+
+Print the pattern
+Example Input:
+10
+
+Output:
+
+* * * * * * * * * * 
+ * * * * * * * * * 
+  * * * * * * * * 
+   * * * * * * * 
+    * * * * * * 
+     * * * * * 
+      * * * * 
+       * * * 
+        * * 
+         * 
+         
+Code:
+num = int(input())
+
+for rows in range(num, 0, -1):
+    for columns in range(0, num-rows):
+        print(end=" ")
+    for columns in range(0, rows):
+        print("*", end=" ")
+    print()
