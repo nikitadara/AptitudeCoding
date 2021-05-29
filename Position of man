@@ -1,0 +1,53 @@
+A man from origin can move in below direction,
+10 Mts right in first turn,
+20 Mts up in second turn,
+30 Mts left in third turn,
+40 Mts down in fourth turn,
+50 Mts right in fifth turn,
+
+10 Mts right in sixth turn,
+20 Mts up in seventh turn,
+30 Mts left in eighth turn,
+40 Mts down in ninth turn,
+50 Mts right in tenth turn and so on
+
+
+Write a program to print the position of man from origin in nth turn.
+where 2<=n <= 1000.
+n = no of turns.
+
+Input Format:
+Take integer from stdin.
+
+Output Format:
+print the position of man from origin.
+
+Example Input:
+3
+
+Output:
+-20 20
+
+Explanation
+In each turn the step size increases by 10. Also, the turns move from right, up, left, down and right then the same steps keeps repeating
+In our case, man starts from (0,0) --> (10,0) --> (10,20) --> (-20,20)
+Hence answer is (-20,20)
+
+
+N=int(input())
+a=0
+b=0
+for i in range(1,N+1):
+    if(i%5)==1:
+        a+=10
+    elif(i%5)==2:
+        b+=20
+    elif(i%5)==3:
+        a-=30
+    elif(i%5)==4:
+        b-=40
+    elif(i%5)==0:
+        a+=50
+    else:
+        pass
+print(a,b)
