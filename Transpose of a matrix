@@ -1,0 +1,67 @@
+Write a program to find the transpose of a given n*m matrix.
+
+Input Format:
+
+First line take an Integer from stdin  which is number of rows n.
+Second line take an Integer from stdin which is number of columns m.
+Third line take an Integers which are matrix elements
+Output Format:
+
+Transpose of a matrix
+
+Example Input:
+
+1   2   3
+4   5   6
+7   8   9
+
+
+Output:
+
+1   4   7
+2   5   8
+3   6   9
+
+Code:
+import java.util.Scanner;
+class Main
+{  
+public static void main(String args[])
+{  
+//creating a matrix 
+Scanner sc=new Scanner(System.in);
+int r=sc.nextInt();
+int c=sc.nextInt();
+int[][] original=new int[10][10];    
+for(int i=0;i<r;i++)
+{
+for(int j=0;j<c;j++)
+{
+original[i][j]=sc.nextInt();
+}
+}
+    
+//creating another matrix to store transpose of a matrix  
+int[][] transpose=new int[10][10];   
+    
+//Code to transpose a matrix  
+for(int i=0;i<r;i++)
+{    
+for(int j=0;j<c;j++)
+{    
+	transpose[i][j]=original[j][i];  
+}    
+}    
+  
+
+
+for(int i=0;i<r;i++)
+{    
+for(int j=0;j<c;j++)
+{    
+	System.out.print(transpose[i][j]+" ");    
+}    
+System.out.println();//new line    
+}    
+}
+}
