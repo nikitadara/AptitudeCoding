@@ -1,0 +1,55 @@
+Write a program that takes as input  2D Integer array and prints out the middle element in that 2d Array.
+
+Input Format:
+
+The First line take Integer input of row from stdin.
+The Second line take Integer input of colomn from stdin.
+In Third line take the values of 2d array, it has row x colomn elements on a single line.
+Output Format:
+
+Print the Integer which is middle element  in a 2d array .
+
+Note: The Rows and Colomns length is odd always.
+
+Example Input:
+
+3 3
+1 2 3
+4 5 6
+7 8 9
+
+Output:
+5
+
+Example Input:
+
+5 5
+1 2 3 4 5
+6 7 8 9 10
+1 2 3 4 5
+6 7 8 9 10
+1 1 1 1 1
+
+Output:
+3
+
+
+Code:
+#include<iostream>
+using namespace std;
+int main(){
+    int r,c;
+    cin>>r>>c;
+    int mid,in;
+    for(int i=0;i<r;i++){
+		for(int j=0;j<c;j++){
+            cin>>in;
+            if(i==r/2 && j==c/2){
+                mid=in;
+            }
+               	
+        }
+    }
+    cout<<mid;
+    return 0;
+}
