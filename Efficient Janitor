@@ -1,0 +1,66 @@
+The janitor of a high school is insanely efficient. By the end of the day, all of the waster from the trash cans in the school has been shifted into plastic bags which can carry waster weighting between 1.01 pounds and 3.00 pounds.
+
+All of the plastic bags must be dumped into the trash cans outside the school. The janitor can carry at most 3.00 pounds at once.
+
+One trip is described as selecting a few bags which together don't weigh more than 3.00 pounds, dumping them in the outdoor trash can and returning to the school. The janitor wants to make minimum number of trips to the outdoor trash can.
+
+Given the number of plastic bags, n and the weights of each bag, determine the minimum number of trips if the janitor selects bags in the optimal way.
+
+For example, given n=5, plastic bags weighing weights [1.01, 1.99, 2.5, 1.5, 1.01], the janitor can carry all of the trash out in 3 trips: [1.01+1.99, 2.5, 1.5+1.01]
+
+Constraints
+
+1 <= n <= 1000
+1.01 <= weight <= 3.0
+
+Code:
+import java.util.Scanner;
+class Main
+{
+public static void main(String[] args) {
+    Scanner sc=new Scanner(System.in);
+    
+    int n=sc.nextInt();
+    double[] weights=new double[n];
+    for(int i=0;i<n;i++)
+    {
+        weights[i]=sc.nextDouble();
+    }
+	double max = 3.0;
+	System.out.println(getMinTrips(weights, max));
+}
+
+static int res = Integer.MAX_VALUE;
+
+private static int getMinTrips(double[] weights, double max) {
+	boolean[] visited = new boolean[weights.length];
+	dfs(weights, visited, 0.0, 1, max);
+	return res;
+}
+
+private static void dfs(double[] weights, boolean[] visited, double w, int tmp, double max) {
+	if(tmp > res)
+		return;
+	if(isAllVisited(visited)) {
+		res = Math.min(res, tmp);
+		return;
+	}
+	for(int i=0;i<weights.length;i++){
+		if(!visited[i]) {
+			visited[i] = true;
+			if(w + weights[i] <= max)
+				dfs(weights, visited, w + weights[i], tmp, max);
+			else
+				dfs(weights, visited, weights[i], tmp+1, max);
+			visited[i] = false;
+		}
+	}
+}
+
+private static boolean isAllVisited(boolean[] visited) {
+	for(boolean v : visited)
+		if(v == false)
+			return false;
+	return true;
+}
+}
