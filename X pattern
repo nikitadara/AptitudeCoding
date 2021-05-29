@@ -1,0 +1,50 @@
+Write a program to take String if the length of String is odd print X pattern otherwise print INVALID.
+
+Input Format:
+Take a String as input from stdin.
+
+Output Format:
+print the desired Pattern or INVALID.
+
+Example Input:
+edyst
+
+Output:
+
+h   o
+ e l 
+  l  
+ e l 
+h   o
+
+
+import java.util.*;
+public class  Main{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        if(str.length()%2==0)
+        {
+            System.out.println("INVALID");
+        }
+        else{
+           for(int i=0;i<str.length();i++)
+           {
+               for(int j=0;j<str.length();j++)
+               {
+                   if(j==i)
+                   System.out.print(str.charAt(i));
+                   else if(j == str.length()-1-i)
+                   System.out.print(str.charAt(j));
+                   else
+                   System.out.print(" ");
+                  
+ 
+               }
+               System.out.println();
+           }
+ 
+        }
+    }
+}
