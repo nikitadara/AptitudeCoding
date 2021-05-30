@@ -1,0 +1,83 @@
+Some prime numbers can be expressed as Sum of other consecutive prime numbers.
+For example
+
+5 = 2 + 3
+17 = 2 + 3 + 5 + 7
+41 = 2 + 3 + 5 + 7 + 11 + 13
+Your task is to find out how many prime numbers which satisfy this property are present in the range 3 to N subject to a constraint that summation should always start with number 2.
+
+Write code to find out number of prime numbers that satisfy the above mentioned property in a given range.
+
+Input Format:
+First line of input contains k - the number of inputs
+The next k lines contains a number N.
+
+Output Format:
+Print the total number of all such prime numbers which are less than or equal to N.
+
+Example:
+Input:
+k = 2
+ 
+N = 20
+ 
+N = 15
+Output:
+2 (there are 2 such numbers: 5 and 17)
+1
+
+Code:
+#include<bits/stdc++.h>
+using namespace std;
+
+int c_primesum(int n)
+{
+    int cnt=0;
+    int primes[n+1];
+    
+    for(int i=0;i<=n;i++)
+        primes[i]=1;
+    
+    
+    primes[0]=0;
+    primes[1]=0;
+    
+    for(int i=2;i<=sqrt(n);i++)
+    {
+        if(primes[i]==1)
+        {
+            for(int j=2;i*j <=n;j++)
+            	primes[i*j]=0;
+		}
+	}
+    
+    int sum=2;
+    for(int i=3;i<n;i++)
+    {
+        if(primes[i]==1)
+        {
+            sum=sum+i;
+            if(sum<=n && primes[sum]==1)
+                cnt++;
+		}
+        //cout<<"h1"<<endl;
+	}
+    
+    return cnt;
+}
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        cout<<c_primesum(n)<<endl;
+	}
+        
+    return 0;
+}
