@@ -1,0 +1,35 @@
+Given an array of N integers, find the pair of integers in the array which have minimum XOR value. Report the minimum XOR value.
+
+Examples :
+Input
+0 4 3 9
+Output
+3 (0 XOR 3)
+Input
+0 8 7 10
+Output
+2 (8 XOR 10)
+
+Constraints:
+2 <= N <= 100 000
+0 <= A[i] <= 1 000 000 000
+
+
+Code:
+struct Solution {
+  int findMinXor(vector<int> &A) 
+  {
+      /* write your solution here */
+      
+      	int minxor=9999;
+      	for(int i=0;i<A.size();i++)
+      	{
+          	for(int j=i+1;j<A.size();j++)
+          	{
+              	minxor=min(minxor,A[i]^A[j]);
+			}
+		}
+      
+      return minxor;
+  }
+};
