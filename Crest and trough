@@ -1,0 +1,108 @@
+Given an array of n elements, find out all the crests and troughs along with their lengths. Find the absolute difference between the indexes of  longest and shortest crests as well as troughs and display the maximum of both.
+
+An element is said to be crest if both it's previous and next elements are less than the current element.
+An element is said to be trough if both it's previous and next elements are greater than the current element.
+Note: The first and last elements are neither crests nor troughs.
+
+In case of multiple occurrences of shortest crest/trough consider the left most one as shortest and right most one as longest.
+
+Print -1 if at least one crest and trough doesn't exist.
+
+Try to finish the task using O(1) extra space and traversing the array only once.
+
+Input Format
+
+The first line contains an integer, t denoting the number of test cases.
+The first line of each test case contains an integer, n denoting the size of the arr.
+The second line of each test case contains n space-separated integers describing the elements of array.
+Constraints
+
+4<=n<=109
+0<=arr[i]<=n
+Output Format
+
+For every test case print the required output in a new line.
+
+Sample Input 0
+
+1
+8
+3 6 2 8 9 5 10 1
+Sample Output 0
+
+2
+Explanation 0
+
+The crest with maximum length(length-->10-1=9) exists at index 6.
+
+The crest with minimum length(length-->9-8=1) exists at index 4.
+
+The trough with maximum length(length-->8-2=6) exists at index 2.
+
+The trough with minimum length(length-->6-2=4) exists at index 2 (troughs with length 4 exists at two indexes 2 and 5, but take trough at index 2 as shortest trough as it is left most).
+
+Print 2 as (difference between indexes of longest and shortest crests) 6-4 > 2-2 (difference between indexes of longest and shortest troughs).
+
+Code:
+def is_crest(i,arr):          
+    #return whether ith element is crest or not
+    return (arr[i]>arr[i-1] and arr[i]>arr[i+1]) 
+ 
+def is_trough(i,arr):
+    #return whether ith element is trough or not
+    return (arr[i]<arr[i-1] and arr[i]<arr[i+1])
+ 
+def crest_lengths(i,arr):
+    left_len=arr[i]-arr[i-1]
+    right_len=arr[i]-arr[i+1]
+    #return longest and shortest (among crest lengths at left and right side) lengths of the crest
+    return max(left_len,right_len),min(right_len,left_len)
+ 
+def trough_lengths(i,arr):
+    left_len=arr[i-1]-arr[i]
+    right_len=arr[i+1]-arr[i]
+    #return longest and shortest (among trough lengths at left and right side) lengths of the trough
+    return max(left_len,right_len),min(right_len,left_len)
+ 
+def crest_trough(arr,n):
+    shortest_crest,shortest_crest_ind=n+1,n
+    longest_crest,longest_crest_ind=0,-1
+    shortest_trough,shortest_trough_ind=n+1,n
+    longest_trough,longest_trough_ind=0,-1
+    for i in range(1,n-1):
+        #check whther ith element is crest or not
+        if(is_crest(i,arr)):
+            #find longest and shortest (among crest lengths at left and right side) lengths of the crrent crest
+            long,short=crest_lengths(i,arr)
+            #store the longest crest among all crests in longest_crest and it's index in longest_crest_ind
+            if(long>=longest_crest):
+                longest_crest=long
+                longest_crest_ind=i
+            #store the shortest crest among all crests in shortest_crest and it's index in shortest_crest_ind
+            if(short<shortest_crest):
+                shortest_crest=short
+                shortest_crest_ind=i
+        #check whether ith element is trough or not
+        elif(is_trough(i,arr)):
+            long,short=trough_lengths(i,arr)
+            #store the longest trough among all crests in longest_trough and it's index in longest_trough_ind
+            if(long>=longest_trough):
+                longest_trough=long
+                longest_trough_ind=i
+            #store the shortest trough among all troughs in shortest_trough and it's index in shortest_trough_ind
+            if(short<shortest_trough):
+                shortest_trough=short
+                shortest_trough_ind=i
+    
+    if(shortest_crest==n+1 or shortest_trough==n+1):
+        #if either crest or trough doesn't exist return -1
+        return -1
+    else:
+        #find the difference between indices of longest and shortest crests as well as troughs and return the maximum of both.
+        return max(abs(longest_crest_ind-shortest_crest_ind),abs(longest_trough_ind-shortest_trough_ind))
+ 
+t=int(input())
+for _ in range(t):
+    n=int(input())
+    arr=list(map(int,input().split()))
+    print(crest_trough(arr,n))
