@@ -1,0 +1,68 @@
+Write a program to determine whether a number N is equal to the sum of its proper positive divisors (excluding the number itself).
+
+Input format
+
+First line: T (number of test cases)
+For each test case
+First line: N
+Output format
+
+Print YES, if N is equal to the sum of its proper positive divisors else print NO.
+
+Constraints
+
+1 ≤ T ≤ 100
+1 ≤ N ≤ 109
+
+Sample Input
+
+3
+6
+5
+28
+Sample Output
+
+YES
+NO
+YES
+Explanation
+
+6 = 1 + 2+ 3, so it is perfect.
+
+5 != 1 , so it is not perfect.
+
+28 = 1 + 2 + 4 + 7 + 14, so it is perfect.
+
+Code:
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    int n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        
+        int sum=1;
+        for(int i=2; i<=sqrt(n) ; i++)
+        {
+            if(n%i==0)
+            {
+                if(i*i!=n)
+                	sum=sum + i + n/i;
+                else
+                    sum=sum+i;
+			}
+		}
+        
+        if(sum==n && n!=1)
+            cout<<"YES"<<endl;
+        else
+            cout<<"NO"<<endl;
+	}
+    
+    return 0;
+}
